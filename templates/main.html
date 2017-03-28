@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Bitcoin Faucet</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1><a href="/">bincoin.org</a></h1>
+</div>
+
+<div class="container">
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Reserve funds: {{balance}}</div>
+  <div class="panel-body">
+  <div class="row">
+    
+    <form action="/payme" method="POST">
+    <input type="text" size="32" name="wallet">
+    <input type="submit" value="PAYME">
+    </form>
+
+    <p>Last 10 send payments</p>
+    <ul>
+    {% for w in fwallets -%}
+    <li>{{ w[0] }}:{{w[1]}}฿</li>
+    {%- endfor %}
+    </ul>
+
+  </div>
+  </div>
+</div>
+  
+<div class="panel panel-primary">
+  <div class="panel-body">
+  <div class="row">
+  <div class="col-md-6">
+    <form action="/makewallet" method="POST">
+    <input type="submit" value="MAKE NEW WALLET">
+    </form>
+
+    <p>Last 10 wallets</p>
+    <ul>
+    {% for w in rwallets -%}
+    <li>{{ w[0] }}:{{w[1]}}฿ ({{w[2]}})</li>
+    {%- endfor %}
+    </ul>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <p>Last 10 recived payments</p>
+    <ul>
+    {% for w in cwallets -%}
+    <li>{{ w[0] }}:{{w[1]}}฿</li>
+    {%- endfor %}
+    </ul>
+
+  </div>
+
+  </div>
+  </div>
+
+</div>
+
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+</body></html>
